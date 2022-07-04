@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // @NOTE 4. randomNumbers 변수사용
+  // @TODO 4. randomNumbers 변수사용
   // List<int> randomNumbers = [
   //   83242,
   //   42342,
@@ -26,12 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
-        // @NOTE 0. padding :
+        // @TODO 0. padding :
         // padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // @NOTE 10.1. _Header 추출
+            // @TODO 10.1. _Header 추출
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -54,15 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            // @NOTE 10.2. _Body 추출
+            // @TODO 10.2. _Body 추출
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                // @NOTE 2. 숫자 출력 로직 분리
+                // @TODO 2. 숫자 출력 로직 분리
                 //       (e) => _displayNumber(e),
                 // [ 83242,42342,66983,]
 
-                // @NOTE 3. 줄간격 조정 (조건부 top padding : 16)
+                // @TODO 3. 줄간격 조정 (조건부 top padding : 16)
                 // .asMap()
                 // .entries
                 children: [
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                         .toList(),
                   ),
-                  // @NOTE 1. 안전하게 이미지 표시 :
+                  // @TODO 1. 안전하게 이미지 표시 :
                   //         (e) => Flexible(
                   //           child: Image.asset(
                   //             'assets/images/$e.png',
@@ -89,14 +89,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            // @NOTE 10.3. _Footer 추출
+            // @TODO 10.3. _Footer 추출
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
                 ),
-                // @NOTE 5. 랜덤 숫자 생성
+                // @TODO 5. 랜덤 숫자 생성
                 onPressed: () {},
                 child: const Text('Generate!'),
               ),
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
   //   });
   // }
 
-  // // @NOTE 5.1. 중복 숫자 방지
+  // @TODO 5.1. 중복 숫자 방지
   // void onGenerateDistinctNumbers() {
   //   final rand = Random();
   //   final Set<int> newNumbers = {};
