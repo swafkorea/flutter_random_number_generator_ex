@@ -26,82 +26,64 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
-        // @TODO 0. padding :
-        // padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // @TODO 10.1. _Header 추출
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Flexible(
-                  child: Text(
-                    'Random number generator',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold,
-                      color: foregroundColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // @TODO 10.1. _Header 추출
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Flexible(
+                    child: Text(
+                      'Random number generator',
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        color: foregroundColor,
+                      ),
                     ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.settings,
-                    color: primaryColor,
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.settings,
+                      color: primaryColor,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            // @TODO 10.2. _Body 추출
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                // @TODO 2. 숫자 출력 로직 분리
-                //       (e) => _displayNumber(e),
-                // [ 83242,42342,66983,]
-
-                // @TODO 3. 줄간격 조정 (조건부 top padding : 16)
-                // .asMap()
-                // .entries
-                children: [
-                  Row(
-                    children: 4311
-                        .toString()
-                        .split('')
-                        .map(
-                          (e) => Text(
-                            '/$e',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  // @TODO 1. 안전하게 이미지 표시 :
-                  //         (e) => Flexible(
-                  //           child: Image.asset(
-                  //             'assets/images/$e.png',
-                  //             height: 70,
-                  //             width: 50,
-                  //           ),
-                  // ),
                 ],
               ),
-            ),
-            // @TODO 10.3. _Footer 추출
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
+              // @TODO 10.2. _Body 추출
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // @TODO 2. 숫자 출력 로직 분리
+                  //       (e) => _displayNumber(e),
+                  // [ 83242,42342,66983,]
+
+                  // @TODO 3. 줄간격 조정 (조건부 top padding : 16)
+                  // .asMap()
+                  // .entries
+                  children: [
+                    _displayNumber(5436),
+                  ],
                 ),
-                // @TODO 5. 랜덤 숫자 생성
-                onPressed: () {},
-                child: const Text('Generate!'),
               ),
-            ),
-          ],
+              // @TODO 10.3. _Footer 추출
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                  ),
+                  // @TODO 5. 랜덤 숫자 생성
+                  onPressed: () {},
+                  child: const Text('Generate!'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
