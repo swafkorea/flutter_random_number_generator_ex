@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                // @TODO 2. 숫자 출력 로직 분리
+                // @TODO 2. 숫자 출력 로직 분리 (Row -> method)
                 //       (e) => _displayNumber(e),
                 // [ 83242,42342,66983,]
 
