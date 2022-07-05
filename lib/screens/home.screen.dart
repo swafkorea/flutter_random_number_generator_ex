@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // @TODO 100. 최초에도 랜덤 넘버 생성
   List<int> randomNumbers = [
     83242,
     42342,
