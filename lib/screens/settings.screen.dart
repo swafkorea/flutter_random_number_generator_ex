@@ -30,7 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // @TODO 2. display number 구현 (공통 함수)
+                    // @TODO 2. pretty number 위젯 구현
                     Text(
                       maxNumber.toInt().toString(),
                       style: const TextStyle(color: Colors.white),
