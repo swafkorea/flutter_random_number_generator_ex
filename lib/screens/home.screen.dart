@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:random_number_generator_ex/constants/colors.dart';
 import 'package:random_number_generator_ex/screens/settings.screen.dart';
+import 'package:random_number_generator_ex/shared/widgets/pretty-number.widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // @TODO 100. 최초에도 랜덤 넘버 생성
+  // @TODO 101. settings에서 max값을 변경하고 home으로 돌아오면 그 설정으로 번호 자동 생성
   List<int> randomNumbers = [
     83242,
     42342,
@@ -31,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _Header(),
+              _Header(updateSettings: onUpdateSetting),
               _Body(randomNumbers: randomNumbers),
               _Footer(generate: onGenerateDistinctNumbers),
             ],
@@ -56,25 +58,29 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  // void onUpdateSetting() async {
-  //   final result = await Navigator.of(context).push<int>(
-  //     MaterialPageRoute(
-  //       builder: (context) => const SettingsScreen(),
-  //     ),
-  //   );
+  void onUpdateSetting() async {
+    final result = await Navigator.of(context).push<int>(
+      MaterialPageRoute(
+        builder: (context) => SettingsScreen(
+          maxNumber: maxNumber,
+        ),
+      ),
+    );
 
-  //   if (result != null) {
-  //     setState(() {
-  //       maxNumber = result;
-  //     });
-  //   }
-  // }
+    if (result != null) {
+      setState(() {
+        maxNumber = result;
+      });
+    }
+  }
 }
 
 class _Header extends StatelessWidget {
-  // final VoidCallback updateSettings;
+  final VoidCallback updateSettings;
+
   const _Header({
     Key? key,
+    required this.updateSettings,
   }) : super(key: key);
 
   @override
@@ -93,21 +99,7 @@ class _Header extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () async {
-            // @TODO 1. settingsScreen 이동
-            // @TODO 4. 수정된 값 사용
-            // @TODO 5. setState를 하기위해 부모로 이동
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const SettingsScreen(),
-              ),
-            );
-            // final result = await Navigator.of(context).push<int>(
-            //   MaterialPageRoute(
-            //     builder: (context) => const SettingsScreen(),
-            //   ),
-            // );
-          },
+          onPressed: updateSettings,
           icon: const Icon(
             Icons.settings,
             color: primaryColor,
@@ -137,29 +129,11 @@ class _Body extends StatelessWidget {
             .map(
               (e) => Padding(
                 padding: EdgeInsets.only(top: e.key == 0 ? 0 : 16.0),
-                child: _displayNumber(e.value),
+                child: PrettyNumber(value: e.value),
               ),
             )
             .toList(),
       ),
-    );
-  }
-
-  Widget _displayNumber(int value) {
-    return Row(
-      children: value
-          .toString()
-          .split('')
-          .map(
-            (e) => Flexible(
-              child: Image.asset(
-                'assets/images/$e.png',
-                height: 70,
-                width: 50,
-              ),
-            ),
-          )
-          .toList(),
     );
   }
 }
