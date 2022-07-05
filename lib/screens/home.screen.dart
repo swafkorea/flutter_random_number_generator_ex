@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'package:random_number_generator_ex/constants/colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,12 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // @TODO 4. randomNumbers 변수사용
-  // List<int> randomNumbers = [
-  //   83242,
-  //   42342,
-  //   66983,
-  // ];
+  List<int> randomNumbers = [
+    83242,
+    42342,
+    66983,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,57 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // @TODO 10.1. _Header 추출
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Flexible(
-                    child: Text(
-                      'Random number generator',
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                        color: foregroundColor,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.settings,
-                      color: primaryColor,
-                    ),
-                  ),
-                ],
-              ),
-              // @TODO 10.2. _Body 추출
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  // @TODO 2. 숫자 출력 로직 분리
-                  //       (e) => _displayNumber(e),
-                  // [ 83242,42342,66983,]
-
-                  // @TODO 3. 줄간격 조정 (조건부 top padding : 16)
-                  // .asMap()
-                  // .entries
-                  children: [
-                    _displayNumber(5436),
-                  ],
-                ),
-              ),
-              // @TODO 10.3. _Footer 추출
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                  ),
-                  // @TODO 5. 랜덤 숫자 생성
-                  onPressed: () {},
-                  child: const Text('Generate!'),
-                ),
-              ),
+              const _Header(),
+              _Body(randomNumbers: randomNumbers),
+              _Footer(generate: onGenerateDistinctNumbers),
             ],
           ),
         ),
@@ -89,40 +41,80 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // void onGenerateNumbers() {
-  //   final rand = Random();
-  //   final List<int> newNumbers = [];
-  //   // final newNumbers = <int>[];
+  void onGenerateDistinctNumbers() {
+    final rand = Random();
+    final Set<int> newNumbers = {};
+    // final newNumbers = <int>{};
 
-  //   for (var i = 0; i < 3; i++) {
-  //     final number = rand.nextInt(1000);
-  //     newNumbers.add(number);
+    while (newNumbers.length < 3) {
+      final number = rand.nextInt(10);
+      newNumbers.add(number);
+    }
 
-  //     // newNumbers.add(rand.nextInt(1000));
-  //   }
+    setState(() {
+      randomNumbers = newNumbers.toList();
+    });
+  }
+}
 
-  //   setState(() {
-  //     randomNumbers = newNumbers;
-  //   });
-  // }
+class _Header extends StatelessWidget {
+  const _Header({
+    Key? key,
+  }) : super(key: key);
 
-  // @TODO 5.1. 중복 숫자 방지
-  // void onGenerateDistinctNumbers() {
-  //   final rand = Random();
-  //   final Set<int> newNumbers = {};
-  //   // final newNumbers = <int>{};
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Flexible(
+          child: Text(
+            'Random number generator',
+            style: TextStyle(
+              fontSize: 25.0,
+              fontWeight: FontWeight.bold,
+              color: foregroundColor,
+            ),
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.settings,
+            color: primaryColor,
+          ),
+        ),
+      ],
+    );
+  }
+}
 
-  //   while (newNumbers.length < 3) {
-  //     final number = rand.nextInt(10);
-  //     newNumbers.add(number);
+class _Body extends StatelessWidget {
+  final List<int> randomNumbers;
 
-  //     print('new number => $number');
-  //   }
+  const _Body({
+    Key? key,
+    required this.randomNumbers,
+  }) : super(key: key);
 
-  //   setState(() {
-  //     randomNumbers = newNumbers.toList();
-  //   });
-  // }
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: randomNumbers
+            .asMap()
+            .entries
+            .map(
+              (e) => Padding(
+                padding: EdgeInsets.only(top: e.key == 0 ? 0 : 16.0),
+                child: _displayNumber(e.value),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
 
   Widget _displayNumber(int value) {
     return Row(
@@ -139,6 +131,29 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           )
           .toList(),
+    );
+  }
+}
+
+class _Footer extends StatelessWidget {
+  final VoidCallback generate;
+
+  const _Footer({
+    Key? key,
+    required this.generate,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: primaryColor,
+        ),
+        onPressed: generate,
+        child: const Text('Generate!'),
+      ),
     );
   }
 }
