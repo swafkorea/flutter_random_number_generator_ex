@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // @TODO 100. 최초에도 랜덤 넘버 생성
+  // @TODO 101. settings에서 max값을 변경하고 home으로 돌아오면 그 설정으로 번호 자동 생성
   List<int> randomNumbers = [
     83242,
     42342,
@@ -93,7 +94,7 @@ class _Header extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () async {
+          onPressed: () {
             // @TODO 1. settingsScreen 이동
             // @TODO 4. 수정된 값 사용
             // @TODO 5. setState를 하기위해 부모로 이동

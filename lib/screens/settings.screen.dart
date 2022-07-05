@@ -57,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: ElevatedButton.styleFrom(primary: primaryColor),
                   onPressed: () {
                     // @TODO 3. 이전 페이지로 값 전달
-                    Navigator.of(context).pop(maxNumber.toInt());
+                    Navigator.of(context).pop();
                   },
                   child: const Text('Save'),
                 ),
