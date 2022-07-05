@@ -50,6 +50,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   });
                 },
               ),
+              const SizedBox(height: 30),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
