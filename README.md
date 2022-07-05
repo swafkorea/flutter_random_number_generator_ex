@@ -13,4 +13,3 @@
 - main : 최종 코드
 - basic : 최초 레이아웃 및 랜덤 숫자 생성 기능 구현 단계
 - settings : 설정 기능 구현 단계
-- named-routes : named routing 기능 적용 (참고용)
