@@ -20,9 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
+    const n = [10, 20, 30];
+    print(n.asMap().entries);
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
@@ -90,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             // @TODO 10.3. _Footer 추출
+            // @NOTE Container보다 SizedBox를 사용한 이유: 성능, 명확한 용도, lint에서도 Container보다 SizedBox를 권유.
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
