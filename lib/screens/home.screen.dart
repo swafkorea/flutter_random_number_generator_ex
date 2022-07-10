@@ -141,22 +141,4 @@ class _HomeScreenState extends State<HomeScreen> {
   //     randomNumbers = newNumbers.toList();
   //   });
   // }
-
-  Widget _displayNumber(int value) {
-    return Row(
-      children: value
-          .toString()
-          .split('')
-          .map(
-            (e) => Flexible(
-              child: Image.asset(
-                'assets/images/$e.png',
-                height: 70,
-                width: 50,
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
 }
